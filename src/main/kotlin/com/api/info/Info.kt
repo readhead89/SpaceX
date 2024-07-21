@@ -1,6 +1,8 @@
 package com.api.info
 
+import com.apiFactory.Services
 import com.google.gson.Gson
+import com.logger.ExceptionForApi
 import com.response.GetApiInfo
 import com.response.GetCompanyInfo
 import okhttp3.HttpUrl
@@ -10,10 +12,8 @@ import okhttp3.Response
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class Info(private val httpClient: OkHttpClient, baseUrl: HttpUrl) {
+class Info(private val httpClient: OkHttpClient, baseUrl: HttpUrl) : Services() {
     private val infoUrl: HttpUrl = baseUrl.newBuilder().build()
-    private val gson = Gson()
-    private val logger: Logger = LoggerFactory.getLogger(Info::class.java)
 
     /**
      * Method implementation SpaceX API -> GET /Info
@@ -38,7 +38,7 @@ class Info(private val httpClient: OkHttpClient, baseUrl: HttpUrl) {
             // Десериализация JSON в объект GetCompanyInfo
             gson.fromJson(responseBody, GetCompanyInfo::class.java)
         } else {
-            null
+            throw ExceptionForApi("Request failed with status code: ${response.code}")
         }
     }
 
@@ -66,7 +66,7 @@ class Info(private val httpClient: OkHttpClient, baseUrl: HttpUrl) {
             // Десериализация JSON в объект GetCompanyInfo
             gson.fromJson(responseBody, GetApiInfo::class.java)
         } else {
-            null
+            throw ExceptionForApi("Request failed with status code: ${response.code}")
         }
     }
 }

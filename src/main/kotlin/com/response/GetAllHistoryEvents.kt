@@ -1,13 +1,9 @@
 package com.response
 
+
 import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty
 
-// Основной дата-класс для списка событий
-data class GetAllHistoryEvents(
-    @JsonProperty("events")
-    val events: List<GetAllHistoryEventsItem>
-) {
-    // Дата-класс для одного элемента события
+class GetAllHistoryEvents : ArrayList<GetAllHistoryEvents.GetAllHistoryEventsItem>() {
     data class GetAllHistoryEventsItem(
         @JsonProperty("details")
         val details: String?,
@@ -24,12 +20,11 @@ data class GetAllHistoryEvents(
         @JsonProperty("title")
         val title: String?
     ) {
-        // Дата-класс для ссылок внутри события
         data class Links(
             @JsonProperty("article")
             val article: String?,
             @JsonProperty("reddit")
-            val reddit: Any?,
+            val reddit: String?,
             @JsonProperty("wikipedia")
             val wikipedia: String?
         )
