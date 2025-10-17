@@ -16,7 +16,7 @@ class TestInfo : TestBase() {
             apiFactory.info.getCompanyInfo()?.cto
         }
 
-        allureStep("Проверка что запрос успешен") {
+        allureStep("Проверка11111 что запрос успешен") {
             Assertions.assertEquals(companyInfo, ElonMusk.values)
         }
     }
